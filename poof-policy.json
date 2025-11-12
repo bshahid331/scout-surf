@@ -1,0 +1,32 @@
+{
+  "scouts/$scoutId": {
+    "onchain": false,
+    "operationDetails": {
+      "create": "ONLY THE SERVER (PROJECT_VAULT_ADDRESS) can create scouts. This is called by x402-protected API endpoints that authenticate users and create scouts on their behalf, triggering browser-use execution. Required fields are userId (the user the scout belongs to), name, instructions, and status. Status should be set to 'pending' initially. Optional fields include resultAction, sessionId, liveUrl, result, error, startedAt, completedAt, and screenshots which are populated during execution.",
+      "update": "ONLY THE SERVER (PROJECT_VAULT_ADDRESS) can update scouts to track execution progress. The userId cannot be changed. The server updates status, sessionId, liveUrl, result, error, startedAt, completedAt, and screenshots fields as the browser automation progresses through pending → running → completed/error states.",
+      "read": "Authenticated users can read their own scouts (where userId matches their wallet address). The server (PROJECT_VAULT_ADDRESS) can read any scout document to check status and update execution state. Shows all scout fields including execution state, browser session details, results, timing information, and screenshots from browser-use task execution.",
+      "delete": "Only the scout owner can delete their scout. The userId must match the caller's wallet address. This removes the scout and all its execution history."
+    },
+    "fields": {
+      "userId": "Address!",
+      "name": "String",
+      "description": "String?",
+      "status": "String",
+      "instructions": "String",
+      "resultAction": "String?",
+      "sessionId": "String?",
+      "liveUrl": "String?",
+      "result": "String?",
+      "error": "String?",
+      "startedAt": "UInt?",
+      "completedAt": "UInt?",
+      "screenshots": "String?"
+    },
+    "rules": {
+      "create": "@user.address == @constants.PROJECT_VAULT_ADDRESS",
+      "update": "@user.address == @constants.PROJECT_VAULT_ADDRESS && @data.userId == @newData.userId",
+      "read": "@user.address == @data.userId || @user.address == @constants.PROJECT_VAULT_ADDRESS",
+      "delete": "@user.address == @data.userId"
+    }
+  }
+}
