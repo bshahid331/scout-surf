@@ -1,0 +1,22 @@
+# D3.js Basics
+# Source: https://d3js.org/ and community best practices
+# Purpose: Core principles for Claude Code to use D3.js correctly
+
+## Overview
+- D3.js is a library for data-driven DOM manipulation, primarily using SVG for 2D visualizations.
+- Focus: Bind data to elements, transform them based on data values.
+
+## Key Concepts
+- Selections: Use d3.select() and d3.selectAll() to target DOM elements.
+- Data Binding: Use .data() to associate data with elements, .enter() for new elements.
+- Scales: Map data to visual properties (e.g., d3.scaleLinear for continuous data).
+- SVG: Render visuals with SVG elements (<rect>, <circle>, etc.).
+
+## Common Pitfall
+- Don’t manually loop over data; use D3’s data binding (e.g., .data().enter()).
+- Example: Avoid forEach; instead:
+  svg.selectAll('rect').data(data).enter().append('rect');
+
+## Integration Notes
+- In Poof: Use within React’s useEffect to append SVG to a ref.
+- Fetch data from Tarobase (e.g., getManyItems) for dynamic visualizations.

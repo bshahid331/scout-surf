@@ -1,0 +1,58 @@
+# Three.js Core Documentation Excerpts
+# Source: https://threejs.org/docs/ (as of latest release, r174, Feb 2025)
+# Purpose: Quick reference for Claude Code to understand Three.js basics
+
+## Scene
+- Class: THREE.Scene
+- Purpose: Container for all 3D objects, lights, etc.
+- Usage: const scene = new THREE.Scene();
+- Method: scene.add(object) - Adds an object (e.g., mesh, light) to the scene.
+
+## Camera
+- Class: THREE.PerspectiveCamera
+- Purpose: Defines the viewpoint of the scene.
+- Constructor: new THREE.PerspectiveCamera(fov, aspect, near, far)
+  - fov: Field of view in degrees (e.g., 75)
+  - aspect: Width/height ratio (e.g., window.innerWidth / window.innerHeight)
+  - near: Near clipping plane (e.g., 0.1)
+  - far: Far clipping plane (e.g., 1000)
+- Example: const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+- Positioning: camera.position.set(x, y, z);
+
+## Renderer
+- Class: THREE.WebGLRenderer
+- Purpose: Renders the scene to a canvas in the browser.
+- Constructor: new THREE.WebGLRenderer({ antialias: true })
+- Methods:
+  - setSize(width, height): Sets the render output size.
+  - render(scene, camera): Renders the scene from the camera’s perspective.
+  - setAnimationLoop(callback): Sets up a continuous render loop.
+- Example:
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+## Mesh
+- Class: THREE.Mesh
+- Purpose: Represents a 3D object with geometry and material.
+- Constructor: new THREE.Mesh(geometry, material)
+- Example:
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+## Animation Loop
+- Function: requestAnimationFrame(callback)
+- Purpose: Creates a smooth animation loop.
+- Example:
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.x += 0.01;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+## Notes
+- Always append renderer.domElement to a DOM element (e.g., div) to display the scene.
+- Use Y-axis for height adjustments (e.g., camera.position.y = 5), not Z.

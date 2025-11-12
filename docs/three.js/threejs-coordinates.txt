@@ -1,0 +1,26 @@
+
+# Three.js Coordinate System
+# Source: https://threejs.org/docs/ and community insights (e.g., X posts noting Z-axis differences)
+# Purpose: Ensure correct axis usage in Three.js tasks
+
+## Overview
+- Three.js uses a right-handed coordinate system:
+  - X-axis: Left (-) to right (+)
+  - Y-axis: Down (-) to up (+) [Height]
+  - Z-axis: Into screen (-) to out (+) [Depth]
+
+## Key Points
+- Y is the "up" axis, not Z (unlike some engines like Blender or Unity where Z is up).
+- Z controls depth relative to the viewer/camera.
+- Example Adjustments:
+  - To move an object up: object.position.y += 10;
+  - To move an object closer to the camera: object.position.z += 5;
+  - To move an object further away: object.position.z -= 5;
+
+## Common Pitfall
+- Do NOT use position.z for height adjustments; this is a frequent error in AI-generated Three.js code.
+- Verify: If an object should rise, check that .y increases, not .z.
+
+## Camera Positioning
+- Default camera looks along negative Z-axis (e.g., from (0, 0, 5) to (0, 0, 0)).
+- Adjust camera.position.y for height, camera.position.z for distance from the scene.

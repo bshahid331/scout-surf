@@ -1,0 +1,40 @@
+/* Poof system chrome (isolated) */
+:root {
+  --poof-preview-h: 40px;
+  --poof-warn-h: 40px;
+}
+
+#poof-chrome {
+  min-height: 100vh;
+}
+
+/* Reserve space for fixed bars on our wrapper, not <body> */
+#poof-chrome.poof--with-preview.poof--with-warning {
+  padding-top: calc(var(--poof-preview-h) + var(--poof-warn-h));
+}
+#poof-chrome.poof--with-preview:not(.poof--with-warning) {
+  padding-top: var(--poof-preview-h);
+}
+#poof-chrome.poof--with-warning:not(.poof--with-preview) {
+  padding-top: var(--poof-warn-h);
+}
+
+/* Bars are fixed; stacked */
+.poof-preview-bar,
+.poof-integration-warning-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+.poof-preview-bar {
+  top: 0;
+  height: var(--poof-preview-h);
+}
+.poof-integration-warning-bar {
+  top: 0;
+  height: var(--poof-warn-h);
+}
+.poof--with-preview .poof-integration-warning-bar {
+  top: var(--poof-preview-h);
+}

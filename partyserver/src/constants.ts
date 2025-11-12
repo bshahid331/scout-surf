@@ -1,0 +1,4 @@
+export const PROJECT_VAULT_ADDRESS = "D1gXdkGxQHvzg3DyWPY3JDKnL6FjsYdBuvsK6BJytSuJ";
+export const ADMIN_ADDRESS = "82SwasnANxmSRnm1DEyUsYGYQUPU21x2yF4M7DpKSyX";
+export const API_URL = "https://69124f9575594657e0105639-api.poof.new";
+export const PAYMENT_HANDLER_TOKEN = "4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU";

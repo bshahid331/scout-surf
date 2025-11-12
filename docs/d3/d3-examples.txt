@@ -1,0 +1,82 @@
+// D3.js Example Code Snippets for Poof
+// Source: Adapted from https://d3js.org/ examples
+// Purpose: Practical examples for Claude Code
+
+// Example 1: Basic Bar Chart (Standalone)
+import * as d3 from 'd3';
+
+function createBarChart() {
+  const data = [10, 20, 30, 40, 50];
+  const width = 500;
+  const height = 200;
+
+  const svg = d3.select('#chart')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const xScale = d3.scaleBand()
+    .domain(d3.range(data.length))
+    .range([0, width])
+    .padding(0.1);
+
+  const yScale = d3.scaleLinear()
+    .domain([0, d3.max(data)])
+    .range([height, 0]);
+
+  svg.selectAll('rect')
+    .data(data)
+    .enter()
+    .append('rect')
+    .attr('x', (d, i) => xScale(i))
+    .attr('y', d => yScale(d))
+    .attr('width', xScale.bandwidth())
+    .attr('height', d => height - yScale(d))
+    .attr('fill', 'steelblue');
+}
+
+// Example 2: Bar Chart in React (Poof-Compatible)
+import { useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+
+function BarChartComponent() {
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const data = [10, 20, 30, 40, 50];
+    const width = 500;
+    const height = 200;
+
+    const svg = d3.select(chartRef.current)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    const xScale = d3.scaleBand()
+      .domain(d3.range(data.length))
+      .range([0, width])
+      .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(data)])
+      .range([height, 0]);
+
+    svg.selectAll('rect')
+      .data(data)
+      .enter()
+      .append('rect')
+      .attr('x', (d, i) => xScale(i))
+      .attr('y', d => yScale(d))
+      .attr('width', xScale.bandwidth())
+      .attr('height', d => height - yScale(d))
+      .attr('fill', 'steelblue');
+
+    return () => {
+      d3.select(chartRef.current).select('svg').remove();
+    };
+  }, []);
+
+  return <div id="bar-chart-container" ref={chartRef} className="w-full" />;
+}
+
+export default BarChartComponent;

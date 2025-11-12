@@ -1,0 +1,96 @@
+{
+  "info": {
+    "title": "Poof PartyServer API",
+    "version": "1.0.0",
+    "description": "Type-safe HTTP API for real-time applications",
+    "generatedAt": "2025-11-12T03:20:14.089Z"
+  },
+  "authentication": {
+    "strategies": [
+      "public",
+      "jwt",
+      "tarobase"
+    ],
+    "default": "public"
+  },
+  "standardStatusCodes": {
+    "SUCCESS": 200,
+    "BAD_REQUEST": 400,
+    "UNAUTHORIZED": 401,
+    "NOT_FOUND": 404,
+    "INTERNAL_ERROR": 500
+  },
+  "routes": [
+    {
+      "endpoint": "GET /api/scouts/:scoutId/status",
+      "method": "GET",
+      "path": "/api/scouts/:scoutId/status",
+      "description": "Retrieves current scout status from database and polls browser-use API for completion. If task is completed, updates database with results and screenshots. If resultAction is specified, uses Claude with x402-protected email tool to process results and send notifications. Returns immediately with current status.",
+      "tags": [
+        "scouts"
+      ],
+      "public": true,
+      "admin": false,
+      "cron": false,
+      "authentication": {
+        "required": false,
+        "types": []
+      },
+      "secrets": [],
+      "schemas": {},
+      "statusCodes": [
+        200
+      ]
+    },
+    {
+      "endpoint": "POST /api/scouts/create",
+      "method": "POST",
+      "path": "/api/scouts/create",
+      "description": "Creates a new scout and immediately starts browser-use session. Creates browser-use session and task, stores scout in database, and returns immediately without waiting for completion. Public endpoint for MCP usage.",
+      "tags": [
+        "scouts"
+      ],
+      "public": true,
+      "admin": false,
+      "cron": false,
+      "authentication": {
+        "required": false,
+        "types": []
+      },
+      "secrets": [],
+      "schemas": {},
+      "statusCodes": [
+        200
+      ]
+    },
+    {
+      "endpoint": "GET /health",
+      "method": "GET",
+      "path": "/health",
+      "description": "Retrieves comprehensive system health information including service status, uptime, and connectivity to external services like Tarobase. Use this endpoint to monitor system availability and diagnose potential issues before they affect users.",
+      "tags": [
+        "system",
+        "monitoring"
+      ],
+      "public": true,
+      "admin": false,
+      "cron": false,
+      "authentication": {
+        "required": false,
+        "types": []
+      },
+      "rateLimit": {
+        "requests": 100,
+        "window": 60
+      },
+      "secrets": [],
+      "schemas": {
+        "response": "export const HealthResponseSchema = z.object({\n  status: z.enum(['healthy', 'degraded', 'unhealthy']),\n  timestamp: z.number(),\n  version: z.string(),\n  uptime: z.number(),\n  services: z.object({\n    tarobase: z.object({\n      status: z.enum(['connected', 'disconnected', 'error']),\n      latency: z.number().optional(),\n    })"
+      },
+      "statusCodes": [
+        200,
+        500
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+name = "69124f9575594657e0105639"
+main = 'src/index.ts'
+account_id = "ccb9d9a85d963479d13e7dde46d98d6d"
+workers_dev = false
+compatibility_date = "2025-08-15"
+compatibility_flags = [
+  "nodejs_compat",
+  "nodejs_compat_populate_process_env"
+]
+tail_consumers = [{ service = "poof-log-tail" }]
+
+[vars]
+TAROBASE_APP_ID = "69124f9575594657e0105639"
+ENV = "PREVIEW"
+JWT_ISSUER = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Y2DTcFzKs"
+
+[limits]
+cpu_ms = 300_000
+
+[[dispatch_namespaces]]
+binding   = "not_used_locally"
+namespace = "poof_apps"

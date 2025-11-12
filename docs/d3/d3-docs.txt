@@ -1,0 +1,58 @@
+# D3.js Core Documentation Excerpts
+# Source: https://d3js.org/ (v7.8.5, latest as of Feb 2025)
+# Purpose: Quick reference for Claude Code to use D3.js in Poof
+
+## Selections
+- Purpose: Select and manipulate DOM elements.
+- Methods:
+  - d3.select(selector): Selects the first element matching the selector.
+  - d3.selectAll(selector): Selects all elements matching the selector.
+- Example:
+  const svg = d3.select('#chart').append('svg');
+  svg.selectAll('rect').data(data).enter().append('rect');
+
+## Data Binding
+- Purpose: Bind data to DOM elements for visualization.
+- Methods:
+  - selection.data(array): Binds an array of data to the selection.
+  - selection.enter(): Handles new data elements.
+  - selection.exit(): Handles removed data elements.
+- Example:
+  svg.selectAll('rect')
+    .data([10, 20, 30])
+    .enter()
+    .append('rect')
+    .attr('width', d => d);
+
+## Scales
+- Purpose: Map data values to visual properties (e.g., pixel positions).
+- Types:
+  - d3.scaleLinear(): Linear scale for continuous data.
+  - d3.scaleBand(): Band scale for categorical data.
+- Example:
+  const xScale = d3.scaleLinear()
+    .domain([0, 100]) // Data range
+    .range([0, 500]); // Pixel range
+
+## SVG
+- Purpose: D3.js uses SVG for rendering visualizations.
+- Common Elements: <rect>, <circle>, <line>, <path>
+- Example:
+  svg.append('rect')
+    .attr('x', 10)
+    .attr('y', 10)
+    .attr('width', 50)
+    .attr('height', 30)
+    .attr('fill', 'blue');
+
+## Axes
+- Purpose: Add axes to charts.
+- Method: d3.axisBottom(scale), d3.axisLeft(scale), etc.
+- Example:
+  const xAxis = d3.axisBottom(xScale);
+  svg.append('g').call(xAxis);
+
+## Notes
+- Use within React via useEffect to manipulate SVG elements.
+- Append SVG to a DOM element (e.g., div ref) in your components.
+- For Poof: Combine with Tailwind for styling, Tarobase for data.

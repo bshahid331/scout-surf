@@ -1,0 +1,22 @@
+name = "{{TAROBASE_APP_NAME}}"
+main = 'src/index.ts'
+account_id = "{{CLOUDFLARE_ACCOUNT_ID}}"
+workers_dev = false
+compatibility_date = "2025-08-15"
+compatibility_flags = [
+  "nodejs_compat",
+  "nodejs_compat_populate_process_env"
+]
+tail_consumers = [{ service = "poof-log-tail" }]
+
+[vars]
+TAROBASE_APP_ID = "{{TAROBASE_APP_ID}}"
+ENV = "{{ENV}}"
+JWT_ISSUER = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Y2DTcFzKs"
+
+[limits]
+cpu_ms = 300_000
+
+[[dispatch_namespaces]]
+binding   = "not_used_locally"
+namespace = "poof_apps"
