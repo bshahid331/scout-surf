@@ -1,6 +1,12 @@
 # App made with poof.new
 
+App is live at [scout.surf](https://scout.surf)
+
 This is a React application built with Vite, TypeScript, and Tailwind CSS. It includes a modern development setup with ESLint, Prettier, and various UI components.
+
+# Notes
+
+The app is currenlty using USDC on mainnet due to limitations with the Corbits facilatior. We tried manually patching the SDK with CASH but that did not work. We are working on getting CASH working fully.
 
 ## Getting Started
 
@@ -28,3 +34,5 @@ Start the development server with hot reload:
 bun dev --port 3000
 
 The application will be available at http://localhost:3000
+
+
